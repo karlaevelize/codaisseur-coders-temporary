@@ -42,12 +42,15 @@ router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const post = await Post.findByPk(id, {
-      include: {
-        model: Tag,
-        through: {
-          attributes: [],
+      include: [
+        {
+          model: Tag,
+          through: {
+            attributes: [],
+          },
         },
-      },
+        { model: Comment },
+      ],
     });
 
     if (!post)
