@@ -16,7 +16,11 @@ const router = new Router();
 router.get("/", async (req, res, next) => {
   //include tag and developer
   try {
-    const posts = await Post.findAll();
+    const limit = req.query.limit || 10;
+    const offset = req.query.offset || 0;
+
+    const posts = await Post.findAll({ limit, offset });
+
     res.send(posts);
   } catch (e) {
     console.log(e);
