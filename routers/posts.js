@@ -19,7 +19,16 @@ router.get("/", async (req, res, next) => {
     const limit = req.query.limit || 10;
     const offset = req.query.offset || 0;
 
-    const posts = await Post.findAll({ limit, offset });
+    const posts = await Post.findAll({
+      limit,
+      offset,
+      include: {
+        model: Tag,
+        through: {
+          attributes: [],
+        },
+      },
+    });
 
     res.send(posts);
   } catch (e) {
