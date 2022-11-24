@@ -7,7 +7,7 @@ const authRouter = require("./routers/auth");
 const postRouter = require("./routers/posts");
 
 //constants
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 // Create an express app
 const app = express();
